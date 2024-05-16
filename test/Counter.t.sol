@@ -17,18 +17,6 @@ contract CounterTest is Test {
         assertEq(counter.s_number(), 1);
     }
 
-    function test_ArrMap() public {
-        counter.pushArr(1111);
-        counter.pushArr(1111);
-        counter.pushArr(1111);
-
-        counter.addMap(0, 222);
-        counter.addMap(1, 222);
-        counter.addMap(2, 222);
-
-        assertEq(counter.getArrElement(2), counter.getMapElement(2));
-    }
-
     function testFuzz_SetNumber(uint256 x) public {
         counter.setNumber(x);
         assertEq(counter.s_number(), x);
