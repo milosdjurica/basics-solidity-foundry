@@ -25,4 +25,16 @@ contract Encoding {
     function castStringIntoBytes() public pure returns (bytes memory str) {
         str = bytes("str");
     }
+
+    function decodeString() public pure returns (string memory str) {
+        str = abi.decode(encodeString(), (string));
+    }
+
+    function multiEncode() public pure returns (bytes memory str) {
+        str = abi.encode("some string ", "other string!");
+    }
+
+    function multiDecode() public pure returns (string memory str1, string memory str2) {
+        (str1, str2) = abi.decode(multiEncode(), (string, string));
+    }
 }
