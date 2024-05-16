@@ -17,6 +17,7 @@ contract Encoding {
         str = abi.encode("str");
     }
 
+    // ! Basically this does the same thing like abi.encode() BUT it cuts off extra 00000000000
     function encodePackedString() public pure returns (bytes memory str) {
         str = abi.encodePacked("str");
     }
@@ -36,5 +37,19 @@ contract Encoding {
 
     function multiDecode() public pure returns (string memory str1, string memory str2) {
         (str1, str2) = abi.decode(multiEncode(), (string, string));
+    }
+
+    function multiEncodePacked() public pure returns (bytes memory str) {
+        str = abi.encodePacked("some string ", "other string!");
+    }
+
+    // ! This doesn't work !!!
+    function multiDecodePacked() public pure returns (string memory str1, string memory str2) {
+        (str1, str2) = abi.decode(multiEncodePacked(), (string, string));
+    }
+
+    // ! This works !!!
+    function castMultiEncodedToString() public pure returns (string memory str) {
+        str = string(multiEncodePacked());
     }
 }
